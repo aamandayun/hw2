@@ -5,6 +5,9 @@
 #include <iostream>
 #include <set>
 
+#include <algorithm>
+
+//gitignore amazon.cpp book.cpp book.h clothing.cpp clothing.h database.txt datastore.h db_parser.cpp db_parser.h Makefile movie.cpp movie.h product.cpp product.h product_parser.cpp product_parser.h user.cpp user.h util.cpp util.h 
 
 /** Complete the setIntersection and setUnion functions below
  *  in this header file (since they are templates).
@@ -13,20 +16,35 @@
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
+  std::set<T> intersection;
+  //std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(intersection, intersection.begin()));
+  std::set<T> longest = s1.size() > s2.size() ? s1:s2;
+  const std::set<T> shortest = s1.size() >s2.size()? s2:s1;
 
-
-
-
-
+  for(auto i = longest.begin(); i!=longest.end(); ++i){
+    if(shortest.find(*i) != shortest.end()){
+      //found
+      intersection.insert(*i);
+    }
+  }
+  return intersection;
 }
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
 
+  std::set<T> unionSet;
+  std::set_union(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(unionSet, unionSet.begin()));
 
+  for(auto i = s1.begin(); i!= s1.end(); ++i){
+    unionSet.insert(*i);
+  }
 
+  for(auto i = s2.begin(); i!= s2.end(); ++i){
+    unionSet.insert(*i);
+  }
 
-
+  return unionSet;
 }
 
 /***********************************************/
