@@ -2,6 +2,7 @@
 #define BOOK_H
 #include <iostream>
 #include <string>
+#include <set>
 #include "product.h"
 
 
@@ -11,10 +12,11 @@ class Book : public Product{
     virtual ~Book();
 
     virtual std::set<std::string> keywords() const override;
+    virtual std::string displayString() const override;
 
-    private:
-      std::string ISBN_;
-      std::string author_;
+  private:
+    std::string ISBN_;
+    std::string author_;
 
 };
 #endif

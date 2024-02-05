@@ -19,6 +19,6 @@ Clothing::~Clothing(){
 set<string> Clothing::keywords() const{
   set<string> keywords;
   keywords.insert(size_);
-  keywords.insert(author_);
+  keywords.insert(brand_);
   return keywords;
 }
