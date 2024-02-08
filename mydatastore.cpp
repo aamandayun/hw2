@@ -13,6 +13,33 @@
 
 using namespace std;
 
+// MyDataStore::~MyDataStore(){
+//   for(size_t i = 0; i<products_.size(); i++){
+//     if(products_[i]!=nullptr){
+//       delete products_[i];
+//     }
+    
+//   }
+//   products_.clear();
+// }
+void MyDataStore::deleteAllProducts(){
+  for(size_t i = 0; i<products_.size(); i++){
+    if(products_[i]!=nullptr){
+      delete products_[i];
+    }
+  }
+  products_.clear();
+}
+
+void MyDataStore::deleteAllUsers(){
+  for(size_t i = 0; i<users_.size(); i++){
+    if(users_[i]!=nullptr){
+      delete users_[i];
+    }
+  }
+  users_.clear();
+}
+
 
 
 void MyDataStore::addProduct(Product *p){
@@ -46,17 +73,16 @@ if(type==0){
 
   for(size_t i = 0; i<terms.size(); i++){
     string cur = terms[i];
-    cout <<"CUR:"<<cur<<endl;
 
-    while(it != termToProducts_.end()){
-      set<Product *> test = it->second;
-      cout <<"KEY: " <<it->first <<", Value: ";
-      for(set<Product *>::iterator k=test.begin(); k!=test.end(); k++){
-        cout << (*k)->getName() << " ";
-      }
-      cout <<endl;
-      it++;
-    }
+    // while(it != termToProducts_.end()){
+    //   set<Product *> test = it->second;
+    //   cout <<"KEY: " <<it->first <<", Value: ";
+    //   for(set<Product *>::iterator k=test.begin(); k!=test.end(); k++){
+    //     cout << (*k)->getName() << " ";
+    //   }
+    //   cout <<endl;
+    //   it++;
+    // }
     
     it = termToProducts_.find(cur);
     if(it == termToProducts_.end()){
@@ -65,7 +91,7 @@ if(type==0){
       const set<Product *>& p = it->second;
       for(const auto& product : p){
         M[count].insert(product);
-        cout << product->getName()<<endl;
+        // cout << product->getName()<<endl;
         //foundProducts.insert(product);
       }
       count++;
@@ -87,9 +113,6 @@ if(type==0){
     }
   }else{
     foundProducts = M[0];
-    for(set<Product*>::iterator at=foundProducts.begin(); at != foundProducts.end(); ++at){
-      cout << "within found products : "<<(*at)->getName() <<endl;
-    }
     
   }
 }
@@ -101,7 +124,8 @@ if(type==0){
       string cur = terms[i];
       it = termToProducts_.find(cur);
       if(it == termToProducts_.end()){
-        cout << "term not available" <<endl;
+        continue;
+        //cout << "term not available" <<endl;
       }
       else{
         //iterate through the set of products and push to the vector
@@ -152,10 +176,12 @@ void MyDataStore::viewCart(User *u){
     return;
   }
   vector<Product *>& inCart = it->second;
+  int amount = 0;
 
 
   for(vector<Product*>::iterator at=inCart.begin(); at != inCart.end(); ++at){
-    cout << (*at)->displayString()<<endl;
+    amount++;
+    cout <<"Item "<< amount <<"\n"<<(*at)->displayString()<<"\n"<<endl;
   }
 
 }
@@ -163,6 +189,8 @@ void MyDataStore::viewCart(User *u){
 
 void MyDataStore::buyCart(User *u){
   auto it = userProducts_.find(u);
+  if(it != userProducts_.end()){
+
   vector<Product *>& inCart = it->second;
 
   for(vector<Product*>::iterator iter=inCart.begin(); iter != inCart.end();){
@@ -175,6 +203,7 @@ void MyDataStore::buyCart(User *u){
       ++iter;
     }
   }
+}
 
   
 /*

@@ -31,7 +31,7 @@ User* getUserByName(string username, MyDataStore ds){
         }
     }
     if(i==ds.getUsers().size()){
-        cout <<"no user by that name"<<endl;
+        cout <<"Invalid request"<<endl;
         return nullptr;
     }
 }
@@ -117,6 +117,8 @@ int main(int argc, char* argv[])
                     ofile.close();
                 }
                 done = true;
+                ds.deleteAllProducts();
+                ds.deleteAllUsers();
             }
 	    /* Add support for other commands here */
             //addToCart(user, product) ->but product should be hits[index]
@@ -137,19 +139,42 @@ int main(int argc, char* argv[])
             else if(cmd == "VIEWCART"){
                 string username;
                 if(ss>>username){
-                    User* current = getUserByName(username, ds);
-                    ds.viewCart(current);
+                    User* current;
+                    size_t i;
+                    for(i=0; i<ds.getUsers().size(); i++){
+                      if(ds.getUsers()[i]->getName()== username){
+                        current = ds.getUsers()[i];
+                        break;
+                      }
+                    }
+                    if(i==ds.getUsers().size()){
+                      cout <<"Invalid username"<<endl;
+                    }else{
+                      ds.viewCart(current);
+                    }
                 }else{
-                    cout <<"Invalid username"<<endl;
+                    cout <<"Invalid request"<<endl;
                 }
             }
             else if(cmd == "BUYCART"){
                 string username;
+                User* current;
                 if(ss>>username){
-                    User* current = getUserByName(username, ds);
-                    ds.buyCart(current);
-                }else{
+                  size_t i; 
+                  for(i=0; i<ds.getUsers().size(); i++){
+                    if(ds.getUsers()[i]->getName()== username){
+                      current = ds.getUsers()[i];
+                      break;
+                    }
+                  }
+                  if(i==ds.getUsers().size()){
                     cout <<"Invalid username"<<endl;
+                  }else{
+                    ds.buyCart(current);
+                  }
+                    //User* current = getUserByName(username, ds);
+                }else{
+                    cout <<"Invalid request"<<endl;
                 }
             }
 

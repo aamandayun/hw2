@@ -1,6 +1,8 @@
 #include <string>
-#include <set>
 #include <iomanip>
+#include <set>
+#include <sstream>
+#include <iostream>
 #include "movie.h"
 #include "product.h"
 #include "util.h"
@@ -34,7 +36,10 @@ set<string> Movie::keywords() const{
 }
 
 string Movie::displayString() const{
-  return name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + to_string(price_) + " " + to_string(qty_) + " left.";
+  std::ostringstream stream;
+  stream << std::fixed << std::setprecision(2) << price_;
+  std::string result = stream.str();
+  return name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + result + " " + to_string(qty_) + " left.";
 
 }
 

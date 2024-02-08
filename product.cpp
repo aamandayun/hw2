@@ -1,6 +1,7 @@
 #include <sstream>
 #include <iomanip>
 #include "product.h"
+#include "mydatastore.h"
 
 using namespace std;
 
@@ -15,6 +16,10 @@ Product::Product(const std::string category, const std::string name, double pric
 
 Product::~Product()
 {
+  // for(size_t i = 0; i<products_.size(); i++){
+  //   delete products_[i];
+  // }
+  // products_.clear();
 
 }
 

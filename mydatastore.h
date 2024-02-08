@@ -16,6 +16,10 @@ class MyDataStore : public DataStore{
       numProducts_= 0;
       numUsers_ = 0;
     }
+     //virtual ~MyDataStore();
+     void deleteAllProducts(); 
+     void deleteAllUsers(); 
+
 
     void addProduct(Product *p) override;
 
@@ -47,6 +51,7 @@ class MyDataStore : public DataStore{
       return users_;
     }
 
+  //protected:
   private:
     std::map<std::string, std::set<Product *>> termToProducts_;
     vector<Product *> products_;

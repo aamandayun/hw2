@@ -5,6 +5,7 @@
 #include "clothing.h"
 #include "movie.h"
 #include "util.h"
+#include "mydatastore.h"
 using namespace std;
 
 
@@ -16,6 +17,7 @@ ProductParser::ProductParser()
 
 ProductParser::~ProductParser()
 {
+
 
 }
 
