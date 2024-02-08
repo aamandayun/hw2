@@ -1,4 +1,5 @@
 #include <string>
+#include <iomanip>
 #include <set>
 #include "clothing.h"
 #include "product.h"
@@ -40,5 +41,8 @@ set<string> Clothing::keywords() const{
 }
 
 string Clothing::displayString() const{
-  return size_ + "\n" + brand_ + "\n";
+  return name_ + "\n" + "Size: " + size_ + " Brand: " + brand_ + "\n" + to_string(price_) + " " + to_string(qty_) + " left.";
+}
+void Clothing::dump(std::ostream& os) const{
+  os << category_ <<"\n" << name_ << "\n" << std::fixed<<std::setprecision(2)<<price_ <<"\n"<<qty_<<"\n" << size_ << "\n" << brand_ << "\n";
 }

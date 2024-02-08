@@ -1,5 +1,6 @@
 #include <string>
 #include <set>
+#include <iomanip>
 #include "movie.h"
 #include "product.h"
 #include "util.h"
@@ -33,9 +34,13 @@ set<string> Movie::keywords() const{
 }
 
 string Movie::displayString() const{
-  return genre_ + "\n" + rating_ + "\n";
+  return name_ + "\n" + "Genre: " + genre_ + " Rating: " + rating_ + "\n" + to_string(price_) + " " + to_string(qty_) + " left.";
 
 }
 
+
+void Movie::dump(std::ostream& os) const{
+  os << category_ <<"\n" << name_ << "\n" << std::fixed<<std::setprecision(2)<<price_ <<"\n"<<qty_<<"\n" <<genre_ << "\n" <<rating_ << "\n";
+}
 
 

@@ -14,6 +14,8 @@ class Clothing : public Product{
     virtual std::set<std::string> keywords() const override;
     virtual std::string displayString() const override;
 
+    void dump(std::ostream& os) const;
+
   private:
     std::string size_;
     std::string brand_;
