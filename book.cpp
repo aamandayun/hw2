@@ -2,6 +2,7 @@
 #include <set>
 #include "book.h"
 #include "product.h"
+#include "util.h"
 
 using namespace std;
 
@@ -20,6 +21,23 @@ Book::~Book(){
 set<string> Book::keywords() const{
   set<string> keywords;
   keywords.insert(ISBN_);
-  keywords.insert(author_);
+  set<string> author = parseStringToWords(author_);
+  set<string>::iterator at = author.begin();
+  while(at != author.end()){
+    keywords.insert(*at);
+    at++;
+  }
+
+  set<string> name = parseStringToWords(name_);
+
+  set<string>::iterator it = name.begin();
+  while(it != name.end()){
+    keywords.insert(*it);
+    it++;
+  }
   return keywords;
+}
+
+string Book::displayString() const{
+  return ISBN_ + "\n" + author_ + "\n";
 }

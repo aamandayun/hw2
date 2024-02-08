@@ -2,6 +2,7 @@
 #include <set>
 #include "movie.h"
 #include "product.h"
+#include "util.h"
 
 //product: name, price, quantity in stock
 //movie: genre, rating
@@ -17,9 +18,23 @@ Movie::~Movie(){
 
 set<string> Movie::keywords() const{
   set<string> keywords;
-  keywords.insert(genre_);
+  string gen = convToLower(genre_);
+  keywords.insert(gen);
   keywords.insert(rating_);
+
+  set<string> name = parseStringToWords(name_);
+
+  set<string>::iterator it = name.begin();
+  while(it != name.end()){
+    keywords.insert(*it);
+    it++;
+  }
   return keywords;
+}
+
+string Movie::displayString() const{
+  return genre_ + "\n" + rating_ + "\n";
+
 }
 
 

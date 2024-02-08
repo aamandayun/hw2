@@ -17,7 +17,6 @@ template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
   std::set<T> intersection;
-  //std::set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(intersection, intersection.begin()));
   std::set<T> longest = s1.size() > s2.size() ? s1:s2;
   const std::set<T> shortest = s1.size() >s2.size()? s2:s1;
 
@@ -34,7 +33,6 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
 
   std::set<T> unionSet;
-  std::set_union(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(unionSet, unionSet.begin()));
 
   for(auto i = s1.begin(); i!= s1.end(); ++i){
     unionSet.insert(*i);

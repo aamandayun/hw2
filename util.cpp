@@ -26,9 +26,9 @@ std::set<std::string> parseStringToWords(string rawWords)
     char c = newWords[i];
     if(ispunct(c) || c==' ' || c=='\0'){
       string sub = newWords.substr(start, end);
-      if(sub.size()>1 && newWords.substr(start, end).find('/0')==-1){
+      if(sub.size()>1 && newWords.substr(start, end).find('/0')==std::string::npos){
         words.insert(newWords.substr(start, end));
-      }else if(sub.size()>2 && newWords.substr(start, end).find('/0')==-1){
+      }else if(sub.size()>2U && newWords.substr(start, end).find('/0')==std::string::npos){
         words.insert(newWords.substr(start, end));
       }
       start = start+end+1;
